@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import initialState from './initialState';
+import { thunk } from 'redux-thunk';
+import initialState from './intialState';
 import isloadingReducer from './isLoadingRedux';
 import adsReducer from './adsRedux';
 import usersReducer from './usersRedux';

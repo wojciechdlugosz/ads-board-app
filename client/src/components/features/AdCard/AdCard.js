@@ -1,6 +1,7 @@
 import { Button, Card } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { IMGS_URL } from '../../../config'
+import { IMGS_URL } from '../../../config';
+import styles from './AdCard.module.scss';
 
 const AdCard = ({ _id, title, location, price, picture}) => {
 	return (

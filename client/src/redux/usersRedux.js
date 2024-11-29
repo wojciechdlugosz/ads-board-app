@@ -10,12 +10,12 @@ export const logOut = payload => ({ type: LOG_OUT, payload });
 const userReducer = (statePart = [], action) => {
 	switch (action.type) {
 		case LOG_IN:
-			return action.payload
+			return action.payload;
 		case LOG_OUT:
-			return null
+			return null;
 
 		default:
-			return statePart
+			return statePart;
 	}
 };
 
