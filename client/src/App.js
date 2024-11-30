@@ -17,9 +17,9 @@ function App() {
     <MainLayout>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/ads/:id' element={<Ad />} />
-        <Route path='/ads/add' element={<AddAd />} />
-        <Route path='/ads/edit/:id' element={<EditAd />} />
+        <Route path='/ad/:id' element={<Ad />} />
+        <Route path='/ad/add' element={<AddAd />} />
+        <Route path='/ad/edit/:id' element={<EditAd />} />
         <Route path='/ads/search/:searchPhrase' element={<SearchPage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

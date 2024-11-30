@@ -1,4 +1,3 @@
-import styles from './Ad.module.scss'
 import { getAdById } from "../../../redux/adsRedux";
 import { Navigate, Link } from "react-router-dom";
 import { useParams } from 'react-router';
@@ -19,9 +18,8 @@ const Ad = () => {
       <h2 className='my-4' >Ad page</h2>
       <Row>
         <Col xs='12' md='6' lg='6' className='p-3 border rounded'>
-          <div className={styles.imageBox}>
+          <div>
             <img 
-              className={styles.image}
               alt={ad.title}
               src={ IMGS_URL + ad.picture } />
           </div>
@@ -36,10 +34,10 @@ const Ad = () => {
           {user === ad.seller && (
           <Row className="d-flex justify-content-center">
             <Col>
-              <Button className="w-100 p-3" variant="primary" as={Link} to={"/ad/editAd/" + ad._id}>Edit</Button>
+              <Button className="w-100 p-3" variant="light" as={Link} to={"/ad/editAd/" + ad._id}>Edit</Button>
             </Col>
             <Col>
-              <Button className="w-100 p-3" variant="danger" as={Link} to={"/ad/deleteAd/" + ad._id}>Delete</Button>
+              <Button className="w-100 p-3" variant="light" as={Link} to={"/ad/deleteAd/" + ad._id}>Delete</Button>
             </Col>
           </Row>
           )}
