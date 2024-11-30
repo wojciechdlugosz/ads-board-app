@@ -13,17 +13,18 @@ const Home = () => {
   const isLoading = useSelector(state => getIsLoading(state));
 
   return (
-    <Container>
+    <Container className='min-vh-100'>
         <Row>
-            <SearchForm />
-            <Col>
-                <h1 className='m-3 d-flex justify-content-center text-primary'>All Notices</h1>
+            <Col className='align-self-center m-3 d-flex justify-content-start'>
+                <Button as={NavLink} to='/ads/add' variant='primary'> Add New notice </Button>
             </Col>
-            <Col className='align-self-center m-4 d-flex justify-content-end'>
-                <Button as={NavLink} to='/ads/add' variant='primary'> Create New Advert </Button>
+            <Col className='m-3 d-flex justify-content-end'>
+                <SearchForm />
             </Col>
+            
         </Row>
-        {ads.length === 0 && !isLoading && <p className='text-primary d-flex justify-content-center'>No notices</p>}
+        <h1 className='m-3 d-flex justify-content-center text-primary'>All Notices</h1>
+        {ads.length === 0 && !isLoading && <p className='text-primary d-flex justify-content-center '>No notices</p>}
         {isLoading && <Spinner animation='border' variant='primary' />}
         {!isLoading && <Ads />}
     </Container>

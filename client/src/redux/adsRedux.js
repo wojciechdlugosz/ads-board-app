@@ -5,6 +5,7 @@ import { setLoading } from './isLoadingRedux';
 export const getAds = ({ ads }) => ads;
 export const getAdById = ({ ads }, adId) => ads.find(ad => ad._id === adId);
 
+
 //actions
 const createActionName = actionName => `app/ads/${actionName}`;
 const LOAD_ADS = createActionName('LOAD_ADS');
@@ -30,35 +31,47 @@ export const fetchAds = () => {
 
   export const editAdRequest = ( ad ) => {
     return(dispatch) => {
+      const fd = new FormData()
+          fd.append('title', ad.title)
+          fd.append('content', ad.content)
+          fd.append('date', ad.date)
+          fd.append('picture', ad.picture)
+          fd.append('price', ad.price)
+          fd.append('location', ad.location)
+          fd.append('user', ad.user)
+  
       const options = {
         method: 'PUT',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...ad }),
+        body: fd
       };
-      
       fetch(`${API_URL}/ads/${ad._id}`, options)
-        .then(() => {dispatch(editAd(ad, ad._id))});
+        //.then(() => {dispatch(updateAd(ad, ad.id))})
+        .then(() => {dispatch(fetchAds())})
     };
   };
 
   export const addAdRequest = ad => {
     return(dispatch) => {
+  
+      const fd = new FormData()
+          fd.append('title', ad.title)
+          fd.append('content', ad.content)
+          fd.append('date', ad.date)
+          fd.append('picture', ad.picture)
+          fd.append('price', ad.price)
+          fd.append('location', ad.location)
+          fd.append('user', ad.user)
+  
       const options = {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      
-        body: JSON.stringify( ad )
+        body: fd
       };
       
       fetch(`${API_URL}/ads`, options)
-        .then(() => {dispatch(addAd(ad))})
         .then(() => {dispatch(fetchAds())})
+        .catch((err) => console.log(err))
     };
   };
   
