@@ -1,4 +1,5 @@
 import { useNavigate, Navigate } from "react-router-dom";
+import { Container } from 'react-bootstrap';
 import { addAdRequest } from '../../../redux/adsRedux'
 import AdForm from "../AdForm/AdForm";
 import { getUser } from '../../../redux/usersRedux';
@@ -19,8 +20,6 @@ const AddAdForm = () => {
     return `${hour}:${min} ${day}-${month}-${year}`;
   }
 
-  const title = 'Add ad'
-  
   const handleSubmit = ad => {
     ad.date = getDate()
     dispatch(addAdRequest(ad));
@@ -30,7 +29,10 @@ const AddAdForm = () => {
   if (!user) return <Navigate to="/" />;
 
   return (
-    <AdForm action={handleSubmit} pageTitle={title} actionText='Add ad' />
+    <Container className='min-vh-100'>
+      <h1 className='m-3 d-flex justify-content-center text-primary'>All ads</h1>
+      <AdForm action={handleSubmit} actionText='Add new ad' />
+    </Container>
   );
   
 };

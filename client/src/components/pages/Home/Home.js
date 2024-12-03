@@ -16,15 +16,15 @@ const Home = () => {
     <Container className='min-vh-100'>
         <Row>
             <Col className='align-self-center m-3 d-flex justify-content-start'>
-                <Button as={NavLink} to='/ads/add' variant='primary'> Add New notice </Button>
+                <Button as={NavLink} to='/ad/add' variant='primary'> Add new ad </Button>
             </Col>
             <Col className='m-3 d-flex justify-content-end'>
                 <SearchForm />
             </Col>
             
         </Row>
-        <h1 className='m-3 d-flex justify-content-center text-primary'>All Notices</h1>
-        {ads.length === 0 && !isLoading && <p className='text-primary d-flex justify-content-center '>No notices</p>}
+        <h1 className='m-3 d-flex justify-content-center text-primary'>All ads</h1>
+        {ads.length === 0 && !isLoading && <p className='text-primary d-flex justify-content-center '>No ads</p>}
         {isLoading && <Spinner animation='border' variant='primary' />}
         {!isLoading && <Ads />}
     </Container>
