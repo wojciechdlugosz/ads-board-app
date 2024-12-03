@@ -14,7 +14,7 @@ const authRoutes = require('./routes/auth.routes');
 
 // start express server
 const app = express();
-app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 
 const server = app.listen(process.env.PORT || 8000, () => {
 	console.log('Server is running on port: 8000');
@@ -27,7 +27,7 @@ connectToDB();
 if (process.env.NODE_ENV !== 'production') {
 	app.use(
 		cors({
-			origin: ['http://localhost:3000'],
+			origin: ['http://localhost:3000', 'http://localhost:8000'],
 			credentials: true,
 		})
 	);

@@ -1,6 +1,8 @@
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout/MainLayout';
+import { fetchAds } from './redux/adsRedux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import MainLayout from './components/layout/MainLayout/MainLayout'
 import Home from './components/pages/Home/Home';
 import Ad from './components/pages/Ad/Ad';
 import AddAd from './components/pages/AddAd/AddAd';
@@ -12,7 +14,10 @@ import Logout from './components/pages/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 
 function App() {
-  
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchAds()), [dispatch]);
+
+
   return (
     <MainLayout>
       <Routes>

@@ -6,10 +6,10 @@ const authMiddlware = require('../utils/authMiddlware');
 const imageUpload = require('../utils/imageUploads');
 
 router.get('/ads', ads.getAll);
-router.get('/ads/:id', ads.getById);
-router.get('/ads/search/:searchPhrase', ads.getBySearchPhrase);
-router.post('/ads', authMiddlware, imageUpload.single('picture'), ads.post);
-router.delete('/ads/:id', authMiddlware, ads.delete);
-router.put('/ads/:id', authMiddlware, imageUpload.single('picture'), ads.put);
+router.get('/ads/:id', ads.getOne);
+router.get('/ads/search/:searchPhrase', ads.searchAll);
+router.post('/ads', authMiddlware, imageUpload.single('picture'), ads.postOne);
+router.delete('/ads/:id', authMiddlware, ads.deleteOne);
+router.put('/ads/:id', authMiddlware, imageUpload.single('picture'), ads.putOne);
 
 module.exports = router;
