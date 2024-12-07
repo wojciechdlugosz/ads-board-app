@@ -1,5 +1,5 @@
 //import styles from './Login.module.scss'
-import { Alert, Spinner, Button, Form } from 'react-bootstrap';
+import { Alert, Spinner, Button, Form, Container } from 'react-bootstrap';
 import { useState } from 'react';
 import { API_URL } from '../../../config';
 import { useDispatch } from 'react-redux';
@@ -27,76 +27,82 @@ const Login = () => {
 
     setStatus('loading');
     fetch(`${API_URL}/auth/login`, options)
+      
       .then(res => {
         if(res.status === 200) {
           setStatus('success');
-          dispatch(logIn({ login }));
-          setTimeout(() => { navigate('/') }, 500);
+          return res.json();
         } else if (res.status === 400) {
           setStatus('clientError');
         } else {
           setStatus('serverError');
         }
       })
+      .then(user => {
+        dispatch(logIn({ user }));
+        setTimeout(() => { navigate('/') }, 500);
+      })
       .catch(err => {
         setStatus('serverError');
       })
   };
   return (
-    <Form onSubmit={handleSubmit} className='col-12 col-sm-3 mx-auto min-vh-100'> 
-      <h2 className='my-4 d-flex justify-content-center text-primary'>Login</h2>
+    <Container className='col-12 col-sm-3 mx-auto min-vh-100'>
+      <h1 className='m-3 d-flex justify-content-center text-primary'>Login</h1>
+      <Form onSubmit={handleSubmit}> 
 
-      {status === 'success' && (
-        <Alert variant='success'>
-          <Alert.Heading>Succes!</Alert.Heading>
-          <p>You have been successfully logined in!</p>
-        </Alert>
-      )}
+        {status === 'success' && (
+          <Alert variant='success'>
+            <Alert.Heading>Succes!</Alert.Heading>
+            <p>You have been successfully logined in!</p>
+          </Alert>
+        )}
 
-      {status === 'serverError' && (
-        <Alert variant='danger'>
-          <Alert.Heading>Something went wrong...</Alert.Heading>
-          <p>Unexpected error... Try again!</p>
-        </Alert>
-      )}
+        {status === 'serverError' && (
+          <Alert variant='danger'>
+            <Alert.Heading>Something went wrong...</Alert.Heading>
+            <p>Unexpected error... Try again!</p>
+          </Alert>
+        )}
 
-      {status === 'clientError' && (
-        <Alert variant='danger'>
-          <Alert.Heading>Incorrect data</Alert.Heading>
-          <p>Login or password are incorrect...</p>
-        </Alert>
-      )}
+        {status === 'clientError' && (
+          <Alert variant='danger'>
+            <Alert.Heading>Incorrect data</Alert.Heading>
+            <p>Login or password are incorrect...</p>
+          </Alert>
+        )}
 
-      {status === 'loading' && (
-        <Spinner animation='border' role='status' className='block mx-auto'>
-          <span className='visually-hidden'>Loading...</span>
-        </Spinner>
-      )}
+        {status === 'loading' && (
+          <Spinner animation='border' role='status' className='block mx-auto'>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
+        )}
 
-      <Form.Group className='mb-3' controlId='formLogin'>
-        <Form.Label className= 'text-primary'>Login</Form.Label>
-        <Form.Control 
-          type='text' 
-          value={login} 
-          onChange={e => setLogin(e.target.value)} 
-          placeholder='Enter login' />
-      </Form.Group>
+        <Form.Group className='mb-3' controlId='formLogin'>
+          <Form.Label className='text-primary'>Login</Form.Label>
+          <Form.Control 
+            type='text' 
+            value={login} 
+            onChange={e => setLogin(e.target.value)} 
+            placeholder='Enter login' />
+        </Form.Group>
 
-      <Form.Group className='mb-3' controlId='formPassword'>
-        <Form.Label className= 'text-primary'>Password</Form.Label>
-        <Form.Control 
-          type='password' 
-          value={password} 
-          onChange={e => setPassword(e.target.value)} 
-          placeholder='Enter password' />
-      </Form.Group>
+        <Form.Group className='mb-3' controlId='formPassword'>
+          <Form.Label className='text-primary'>Password</Form.Label>
+          <Form.Control 
+            type='password' 
+            value={password} 
+            onChange={e => setPassword(e.target.value)} 
+            placeholder='Enter password' />
+        </Form.Group>
 
 
-      <Button variant='primary' type='submit' className='d-flex justify-content-center '>
-        Sign in
-      </Button>
+        <Button variant='primary' type='submit' >
+          Log in
+        </Button>
 
-    </Form>
+      </Form>
+    </Container>
   );
 };
 

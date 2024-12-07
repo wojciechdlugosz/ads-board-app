@@ -1,8 +1,10 @@
+import { Container } from 'react-bootstrap';
+
 const NotFound = () => {
     return (
-        <section>
-            <h2 className='m-4 d-flex justify-content-center text-primary'><strong> URL Not Found </strong></h2>
-        </section>
+      <Container className='min-vh-100'>
+        <h1 className='m-3 d-flex justify-content-center text-primary'><strong>URL not found</strong></h1>
+      </Container>
     );
 };
 

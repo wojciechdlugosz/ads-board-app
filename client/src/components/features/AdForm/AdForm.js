@@ -12,9 +12,9 @@ const AdForm = ({ action, actionText, ...props }) => {
   const [user] = useState(props.user);
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
-  
+
   const handleSubmit = () => {
-    if(content) {
+    if(content ) {
       action({ title, content, picture, price, location, user });
     }
   };
@@ -22,12 +22,14 @@ const AdForm = ({ action, actionText, ...props }) => {
   return (
     <Form onSubmit={validate(handleSubmit)} className='col-12 col-sm-3 mx-auto'>
 
+      <h2 className='my-4' >{props.pageTitle}</h2>
+
       <Form.Group  controlId="formtitle">
         <Form.Label className='text-primary'>Title</Form.Label>
         <Form.Control
           {...register("title", { required: true, minLength: 10, maxLength: 50 })}
           value={title}
-          className='mb-3'
+          className= 'mb-3'
           onChange={e => setTitle(e.target.value)}
           type='text' placeholder='Enter title'
         />
@@ -40,7 +42,7 @@ const AdForm = ({ action, actionText, ...props }) => {
           {...register("content", { required: true, minLength: 20, maxLength: 1000 })}
           as="textarea" placeholder="Enter content" rows={3} 
           value={content}
-          className='mb-3'
+          className= 'mb-3' 
           onChange={e => setContent(e.target.value)} />
           {errors.content && <small className="d-block form-text text-danger mt-2">Content length is incorrect (min is 20, max is 1000)</small>}
       </Form.Group>
@@ -49,7 +51,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         <Form.Label className='text-primary'>Picture</Form.Label>
         <Form.Control
           {...register("picture", { required: false })}
-          className='mb-3'
+          className= 'mb-3'
           onChange={e => setPicture(e.target.files[0])}
           type='file'
         />
@@ -61,7 +63,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         <Form.Control
           {...register("price", { required: true })}
           value={price}
-          className='mb-3'
+          className= 'mb-3'
           onChange={e => setPrice(e.target.value)}
           type='text' placeholder='Enter price'
         />
@@ -73,7 +75,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         <Form.Control
           {...register("location", { required: true })}
           value={location}
-          className='mb-3'
+          className= 'mb-3'
           onChange={e => setLocation(e.target.value)}
           type='text' placeholder='Enter location'
         />

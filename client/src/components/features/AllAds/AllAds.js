@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import { getAds } from '../../../redux/adsRedux';
+import { getAllAds } from '../../../redux/adsRedux';
 import AdCard from '../AdCard/AdCard';
 import { Row } from 'react-bootstrap';
 
-const Ads = () => {
-    const ads = useSelector(getAds);
+const AllAds = () => {
+  const ads = useSelector(getAllAds);
 
     return (
       <Row className='py-4'>
@@ -15,4 +15,4 @@ const Ads = () => {
     );
 };
 
-export default Ads;
+export default AllAds;

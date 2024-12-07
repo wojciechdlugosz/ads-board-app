@@ -1,10 +1,11 @@
 import AddAdForm from '../../features/AddAdForm/AddAdForm';
+import { Container } from 'react-bootstrap';
 
 const AddAd = () => {
   return (
-    <div className='min-vh-100'>
+    <Container className='min-vh-100'>
       <AddAdForm />
-    </div>
+    </Container>
   );
 };
 

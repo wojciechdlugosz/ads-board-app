@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Spinner } from 'react-bootstrap'
+import { Alert, Spinner, Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { API_URL } from '../../../config'
 import AdCard from '../../features/AdCard/AdCard'
 
 const SearchPage = () => {
-  const { searchPhase } = useParams()
+  const { searchPhrase } = useParams()
 	const [status, setStatus] = useState(null)
 	const [adsToShow, setAdsToShow] = useState([])
 
@@ -15,7 +15,7 @@ const SearchPage = () => {
 		const options = {
 			method: 'GET',
 		}
-		fetch(`${API_URL}/ads/search/${searchPhase}`, options)
+		fetch(`${API_URL}/ads/search/${searchPhrase}`, options)
 			.then(res => {
 				if (res.status !== 200) {
 					setStatus('serverError')
@@ -26,13 +26,13 @@ const SearchPage = () => {
 			})
 			.then(ads => setAdsToShow(ads))
 			.catch(() => setStatus('serverError'))
-	}, [searchPhase])
+	}, [searchPhrase])
 	if (!adsToShow) return <p>Nothing matches your search....</p>
 
 	return (
-		<div className={'container'}>
-			<h2 className='my-4' >Searched advertisements</h2>
-			<h2>Search phrase: &quot;{searchPhase}&quot;</h2>
+		<Container className='min-vh-100'>
+			<h1 className='m-3 d-flex justify-content-center text-primary'>Search result</h1>
+			<p className='text-primary'><i>Search phrase: &quot;{searchPhrase}&quot;</i></p>
 			{status === 'loading' && (
 				<Spinner animation='border' role='status'>
 					<span className='visually-hidden'>Loading...</span>
@@ -51,7 +51,7 @@ const SearchPage = () => {
 					<AdCard key={ad._id} ad={ad}/>
 				))}
 			</div>
-		</div>
+		</Container>
 	)
 };
 

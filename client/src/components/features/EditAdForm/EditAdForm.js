@@ -13,8 +13,6 @@ const EditAdForm = () => {
   const  {id}  = useParams();
   const adData = useSelector(state => getAdById(state, id));
 
-  const title = 'Edit ad'
-
   const handleSubmit = ad => {
     ad.date = new Date();
     ad.user = adData.user._id;
@@ -36,7 +34,6 @@ const EditAdForm = () => {
       price={adData.price}
       location={adData.location}
       user={adData.user}
-      pageTitle={title}
     />
   );
   

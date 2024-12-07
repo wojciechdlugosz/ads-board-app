@@ -5,6 +5,6 @@ const escape = function (html) {
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;')
 		.replace(/'/g, '&#039;')
-};
+}
 
 module.exports = escape

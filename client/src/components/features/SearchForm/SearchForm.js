@@ -1,27 +1,38 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './SearchForm.module.scss'
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const SearchForm = () => {
-    const [searchPhrase, setSearchPhrase] = useState('')
-	const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [searchPhase, setSearchPhase] = useState('');
+ 
 
-	const handleSubmit = e => {
-		e.preventDefault()
-		navigate(`/add/search/${searchPhrase}`)
-	}
-
-	return (
-		<form className={styles.searchContainer} onSubmit={handleSubmit}>
-			<input
-				type='search'
-				className={styles.search}
-				placeholder='Search...'
-				value={searchPhrase}
-				onChange={e => setSearchPhrase(e.target.value)}></input>
-		</form>
-	);
-
+  const handleSubmit = e => {
+    e.preventDefault()
+    let adress = '/ads/search/' + searchPhase;
+    navigate(adress);
+  };
+  
+  return (
+    <Form onSubmit={handleSubmit} className="d-flex justify-content-end">
+      <Row className="">
+        <Col>
+          <Form.Group className="mb-3" controlId="formSearchPhase">
+            <Form.Control
+              value={searchPhase}
+              onChange={e => setSearchPhase(e.target.value)}
+              type='search' placeholder='Search ad'
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Button variant="primary" type="submit">
+            Search
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  );
 };
 
 export default SearchForm;

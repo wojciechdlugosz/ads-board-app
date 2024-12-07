@@ -19,6 +19,7 @@ const Logout = () => {
           dispatch(logOut());
           navigate('/');
         });
+        // eslint-disable-next-line
   }, [dispatch]);
 
   return null;

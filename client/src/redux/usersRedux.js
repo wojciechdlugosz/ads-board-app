@@ -1,8 +1,7 @@
 import { API_URL } from '../config'
-import { setLoading } from './isLoadingRedux';
 
 //selectors
-export const getUser = ({ user }) => user;
+export const getUser = ({ user }) =>  user;
 
 // actions
 const createActionName = actionName => `app/users/${actionName}`;
@@ -15,11 +14,12 @@ export const logOut = payload => ({ type: LOG_OUT, payload });
 
 export const isUserLoginedIn = () => {
   return(dispatch) => {
-    dispatch(setLoading(true))
+    
     fetch(`${API_URL}/auth/user`)
+    .then(res => res.json())
       .then(res => {
         if(res.status === 200) {
-          dispatch(logIn( res.login ));
+          dispatch(logIn( res.user ));
         } else {
           console.log('No user logined in')
         }
